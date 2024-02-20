@@ -1,4 +1,4 @@
-package cl.challenges.references;
+package cl.challenges.mutability;
 
 public class Cheese {
 	
