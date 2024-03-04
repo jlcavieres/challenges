@@ -2,13 +2,13 @@ package cl.challenges.mutability;
 
 public class Cheese {
 	
-	private int levelOfStinkiness;
+	private Integer levelOfStinkiness;
 
-	public int getLevelOfStinkiness() {
+	public Integer getLevelOfStinkiness() {
 		return levelOfStinkiness;
 	}
 
-	public void setLevelOfStinkiness(int levelOfStinkiness) {
+	public void setLevelOfStinkiness(Integer levelOfStinkiness) {
 		this.levelOfStinkiness = levelOfStinkiness;
 	}	
 

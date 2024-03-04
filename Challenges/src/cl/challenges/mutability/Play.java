@@ -12,9 +12,9 @@ public class Play {
 		String cadena = new String("test");
 		System.out.println("cadena original:"+ cadena +" ("+ cadena.hashCode() +")");
 		
-		System.out.println(queso.getLevelOfStinkiness());
-		System.out.println("queso mem "+ queso.hashCode());
-		
+		System.out.println();
+		System.out.println("LVL (pre): "+ queso.getLevelOfStinkiness());
+		System.out.println("queso mem (pre)"+ queso.hashCode());		
 		System.out.println();
 		
 				
@@ -25,8 +25,10 @@ public class Play {
 		increaseLevel(queso, cadena, sb);	
 		
 		
-		System.out.println(queso.getLevelOfStinkiness());
-		System.out.println("queso mem "+ queso.hashCode());
+		System.out.println();
+		System.out.println("LVL (post): "+ queso.getLevelOfStinkiness());
+		System.out.println("queso mem (post)"+ queso.hashCode());
+		System.out.println();
 		
 		System.out.println("cadena post llamada al método:"+ cadena +" ("+ cadena.hashCode() +")");		
 		System.out.println("sb post llamada al método:"+ sb +" ("+ sb.hashCode() +")");
@@ -52,13 +54,14 @@ public class Play {
 	
 	// GRAND CONCLUSION
 	
-	// Java primitives has a especific behavior, they aren't clasess, so enter to the function as a parameter with no reference, it make them behavior as an inmutable (chance doesn't persist)
+	// Java primitives has a specific behavior, they aren't clasess, so enter to the function as a parameter with no reference, it make them behavior as an inmutable (chance doesn't persist)
+	//  however it they are a memmer of a class and it changed, the behavior is like a mutable object (the change in the parent object persist) 
 	
 	// An immutable object can’t be updated, programs need to create a new object for every change of state
 	
-	// All primitive wrapper clasess are inmutable, including the speacial String and its custom using of pool of values
+	// All primitive wrapper classess are inmutable, including the especial String and its custom using of pool of values
 	
 	// Mutable objects can be modified inside the method, and those changes will reflect 
-	// outside the method since they are referencing the same object.	
+	// outside the method since they are referencing the same object, the parameter than enters the method is the reference, not the object it self	
 
 }
