@@ -1,122 +1,76 @@
 package cl.challenges.collections;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.Set;
 
 public class CollectionsPlay {
-	
-	
-	public static void main(String[] args) {
-		
-		// sumItems();		
-		// combineMaps();
-		
-		countEmtyStringInList();
 
-	}
-	
-	/**
-	 * Challenge, sumatory of items from a collection using a lambda expresion
-	 *  
-	 */
-	
-	public static void sumItems() {
-		
+	public static void main(String[] args) {
+
+		int[] numbers = { -1, 0, 1, 2, -1, -4 };
+		// [-1,0,1]
+		// [-1,-1,2]
+
+		// int[] numbers = {-1, 8, 0, 8, 1, 2,-1, -1, -4};
+		// [-1,0,1]
+		// [2,-1,-1]
+
+		// int[] numbers = {-1, 0, -3, 1, 2, -2, -4, 3};
+		// [-2, -1, 3]
+		// [-2, 0, 2]
+		// [-3, 1, 2]
+		// [-3, 0, 3]
+		// [-4, 1, 3]
+		// [-1, 0, 1]
+
+		Set<String> triplets = new HashSet<>();
+
+		List<Integer> finded;
+
+		// El conjunto de números debe ser par, por eso length -1
+
+		System.out.println("  iA | iB | iC  | Sum | Considerado ");
+
 		int sum = 0;
-		
-		HashMap<String, Integer> hashMap1 = new HashMap<>();
-        hashMap1.put("a", 1);
-        hashMap1.put("b", 3);
-        hashMap1.put("c", 8);
-        
-        System.out.println("hashMap1 values prior forEach: "+ hashMap1);
-		
-		
-		// Technique 1
-		// Using stream API
-		
-		// Technique 2
-		// Using hashmap foreach
-		
-		// No se puede !!, la variable sum no tiene contexto
-		// hashMap1.forEach((key, value) -> sum += value);
-		
-        
-        sum = hashMap1.values().stream().reduce(0, (subtotal, value) -> subtotal + value);
-        
-        // reduce no modifica el contenido
-        System.out.println("hashMap1 values post forEach: "+ hashMap1);
-        
-        // System.out.println("Size: " + hashMap1.size());        
-        System.out.println("hashMap1 sumatoria: "+ sum);		
-	}
-	
-	
-	public static void countEmtyStringInList() {
-		
-		int sum = 0;
-		
-		List<String> lista = new ArrayList<>(List.of("hola", "hi", "", "chiao", ""));
-		
-		
-		// long countEmpty = lista.stream().filter( i -> i.length() == 0).count(); // usando un count nativo del stream
-		long countEmpty = lista.stream().filter( i -> i.length() == 0).collect(Collectors.counting()); // usando un collector
-         
-        
-        System.out.println("calculado por stream hay : "+ countEmpty +" items");
-	}
-	
-	
-	
-	/**
-	 * Challenge, merge two list
-	 *  
-	 */
-	
-	public static void combineMaps() {
-		
-		int sum = 0;
-		
-		HashMap<String, Integer> hashMap1 = new HashMap<>();
-        hashMap1.put("a", 1);
-        hashMap1.put("b", 3);
-        hashMap1.put("c", 8);
-        
-        HashMap<String, Integer> hashMap2 = new HashMap<>();
-        hashMap1.put("d", 13);
-        hashMap1.put("e", 8);
-        hashMap1.put("f", 9);
-        
-        
-        // Simple merge using método especial
-        hashMap1.putAll(hashMap2);
-        
-        // Merge using stream API
-        
-        hashMap1.forEach( (k, v) -> { System.out.println("key: "+ k +" value:"+ v); });
-        
-        Long result = hashMap1.entrySet().stream().collect(Collectors.counting());
-        
-         
-        
-        System.out.println("calculado por stream hay : "+ result +" items"); 
-        
-        // hashMap1.values().stream().collect(Collectors.);
-        
-        // System.out.println("hashMap1 values prior forEach: "+ hashMap1);
- 
-		
-        
-        // sum = hashMap1.values().stream().reduce(0, (subtotal, value) -> subtotal + value);
-        
-        // reduce no modifica el contenido
-        // System.out.println("hashMap1 values post forEach: "+ hashMap1);
-        
-        // System.out.println("Size: " + hashMap1.size());        
-        // System.out.println("hashMap1 sumatoria: "+ sum);		
+
+		boolean indexConsiderado = true;
+
+		for (int iA = 0; iA <= numbers.length - 1; iA++) {
+
+			for (int iB = 0; iB <= numbers.length - 1; iB++) {
+
+				System.out.println(" ---   ---  ---   ---  ------\n");
+
+				// No se debe considerar al elemento en el índice A ni B
+				for (int iC = 0; iC <= numbers.length - 1; iC++) {
+
+					indexConsiderado = (iA == iB || iC == iA || iC == iB) ? false : true;
+
+					sum = numbers[iA] + numbers[iB] + numbers[iC];
+
+					if (indexConsiderado && sum == 0) {
+						// los pongo en una estructura que me permita ordenarlos
+						finded = new ArrayList<Integer>(Arrays.asList(numbers[iA], numbers[iB], numbers[iC]));
+
+						finded.sort(Comparator.naturalOrder());
+
+						// No permite agregar repetidos
+						triplets.add(finded.toString());
+					}
+
+					System.out.println(
+							"  " + iA + "  |  " + iB + " |  " + iC + "   | " + sum + "  | " + indexConsiderado);
+				}
+			}
+		}
+
+		System.out.println("");
+		System.out.println("TRIPLETAS FINALES: " + triplets);
+
 	}
 
 }
